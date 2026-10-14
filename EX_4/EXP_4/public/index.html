@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thina | Node.js GET & POST Lab</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 25px 15px;
+            font-family: Arial, sans-serif;
+            background: #edf2ff;
+            color: #243047;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header {
+            background: #1746a2;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 14px;
+        }
+
+        .header h1 {
+            margin-top: 0;
+        }
+
+        .card {
+            background: white;
+            margin-top: 22px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px #d5dcef;
+        }
+
+        h2 {
+            color: #1746a2;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 7px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd3e0;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin-top: 15px;
+            background: #1746a2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d327b;
+        }
+
+        pre {
+            padding: 18px;
+            background: #101827;
+            color: #a7f3d0;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            min-height: 90px;
+        }
+
+        .note {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            margin: 25px 0;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <header class="header">
+        <h1>Node.js GET & POST Request Handling</h1>
+        <h3>THINA RAJKUMAR R</h3>
+        <p>B.Tech Information Technology</p>
+        <p>Kongu Engineering College</p>
+    </header>
+
+    <section class="card">
+        <h2>1. GET Request — Search</h2>
+
+        <p>Enter a keyword and category to retrieve information.</p>
+
+        <label for="keyword">Search Keyword</label>
+        <input id="keyword" value="node" placeholder="Enter keyword">
+
+        <label for="category">Category</label>
+        <select id="category">
+            <option value="web">Web Development</option>
+            <option value="frameworks">Frameworks</option>
+            <option value="tutorials">Tutorials</option>
+            <option value="modules">Modules</option>
+        </select>
+
+        <button onclick="searchData()">Send GET Request</button>
+    </section>
+
+    <section class="card">
+        <h2>2. POST Request — Student Registration</h2>
+
+        <label for="name">Student Name</label>
+        <input id="name" value="THINA RAJKUMAR R">
+
+        <label for="email">Email Address</label>
+        <input id="email" type="email"
+               value="thinarajkumar278@gmail.com">
+
+        <button onclick="registerStudent()">
+            Send POST Request
+        </button>
+    </section>
+
+    <section class="card">
+        <h2>3. Server Response</h2>
+        <p class="note" id="status">Status: Waiting for request</p>
+        <pre id="output">Click a button to test the server.</pre>
+    </section>
+
+    <footer>
+        Web Application Development Practical — Experiment 4
+    </footer>
+
+</div>
+
+<script>
+    async function displayResponse(response) {
+        const data = await response.json();
+
+        document.getElementById("status").textContent =
+            "Status: " + response.status + " " + response.statusText;
+
+        document.getElementById("output").textContent =
+            JSON.stringify(data, null, 2);
+    }
+
+    async function searchData() {
+        const keyword =
+            document.getElementById("keyword").value.trim();
+
+        const category =
+            document.getElementById("category").value;
+
+        const query = new URLSearchParams({
+            keyword: keyword,
+            category: category
+        });
+
+        try {
+            const response = await fetch("/api/search?" + query);
+            await displayResponse(response);
+        } catch (error) {
+            document.getElementById("status").textContent =
+                "Connection Error";
+
+            document.getElementById("output").textContent =
+                "Could not connect to the Node.js server.";
+        }
+    }
+
+    async function registerStudent() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        try {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    role: "Student"
+                })
+            });
+
+            await displayResponse(response);
+        } catch (error) {
+            document.getElementById("status").textContent =
+                "Connection Error";
+
+            document.getElementById("output").textContent =
+                "Could not connect to the Node.js server.";
+        }
+    }
+</script>
+
+</body>
+</html>
