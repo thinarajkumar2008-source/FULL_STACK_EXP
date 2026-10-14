@@ -1,0 +1,21 @@
+{
+  "name": "ex5-product-management",
+  "version": "1.0.0",
+  "description": "Product management CRUD app using Node.js, Express.js and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "crud",
+    "product-management"
+  ],
+  "author": "THINA RAJKUMAR R",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^6.10.0"
+  }
+}
