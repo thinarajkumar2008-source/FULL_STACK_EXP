@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thina - Student Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eaf0ff;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1746a2;
+        }
+
+        .college {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1746a2;
+        }
+
+        .error {
+            color: #d00000;
+            font-size: 13px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background: #1746a2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d327b;
+        }
+
+        #successMessage {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h2>Student Registration Form</h2>
+
+        <p class="college">
+            <strong>THINA RAJKUMAR R</strong><br>
+            B.Tech Information Technology<br>
+            Kongu Engineering College
+        </p>
+
+        <form id="registrationForm" novalidate>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your full name" autocomplete="name" aria-describedby="nameError">
+            <span class="error" id="nameError"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="thinarajkumar278@gmail.com" autocomplete="email" aria-describedby="emailError">
+            <span class="error" id="emailError"></span>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number" maxlength="10" inputmode="numeric" autocomplete="tel" aria-describedby="mobileError">
+            <span class="error" id="mobileError"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password" autocomplete="new-password" aria-describedby="passwordError">
+            <span class="error" id="passwordError"></span>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Re-enter password" autocomplete="new-password" aria-describedby="confirmPasswordError">
+            <span class="error" id="confirmPasswordError"></span>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" min="18" max="60" aria-describedby="ageError">
+            <span class="error" id="ageError"></span>
+
+            <label for="course">Course:</label>
+            <select id="course" aria-describedby="courseError">
+                <option value="">-- Select Course --</option>
+                <option value="B.Tech IT">B.Tech Information Technology</option>
+                <option value="B.Tech CSE">B.Tech Computer Science</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Node.js">Node.js</option>
+            </select>
+            <span class="error" id="courseError"></span>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p id="successMessage" role="status" aria-live="polite"></p>
+
+        <div class="footer">
+            Web Application Development Practical Exercise
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let valid = true;
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const age = document.getElementById("age").value;
+            const course = document.getElementById("course").value;
+
+            document.querySelectorAll(".error").forEach(function(error) {
+                error.textContent = "";
+            });
+            document.getElementById("successMessage").textContent = "";
+
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required.";
+                valid = false;
+            } else if (name.length < 3) {
+                document.getElementById("nameError").textContent = "Name must contain at least 3 characters.";
+                valid = false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Email is required.";
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Enter a valid email address.";
+                valid = false;
+            }
+
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile)) {
+                document.getElementById("mobileError").textContent = "Mobile number must contain exactly 10 digits.";
+                valid = false;
+            }
+
+            if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "Password must contain at least 6 characters.";
+                valid = false;
+            }
+
+            if (confirmPassword === "") {
+                document.getElementById("confirmPasswordError").textContent = "Please confirm your password.";
+                valid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
+                valid = false;
+            }
+
+            if (age === "") {
+                document.getElementById("ageError").textContent = "Age is required.";
+                valid = false;
+            } else if (Number(age) < 18 || Number(age) > 60) {
+                document.getElementById("ageError").textContent = "Age must be between 18 and 60.";
+                valid = false;
+            }
+
+            if (course === "") {
+                document.getElementById("courseError").textContent = "Please select a course.";
+                valid = false;
+            }
+
+            if (valid) {
+                document.getElementById("successMessage").textContent =
+                    "Registration successful! Welcome, " + name + "!";
+                document.getElementById("registrationForm").reset();
+            }
+        });
+    </script>
+</body>
+</html>
