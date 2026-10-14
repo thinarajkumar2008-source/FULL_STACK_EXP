@@ -1,0 +1,236 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.7;
+}
+
+/* Header */
+header {
+    background-color: white;
+    text-align: center;
+    padding: 35px 20px 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    color: #263445;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 22px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+nav a {
+    color: #1769aa;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e67e22;
+}
+
+nav span {
+    color: #aaa;
+}
+
+/* Main content */
+main {
+    max-width: 1000px;
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* Sections */
+section {
+    background-color: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    scroll-margin-top: 20px;
+}
+
+section h2 {
+    color: #263445;
+    font-size: 24px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1769aa;
+}
+
+section p {
+    margin-bottom: 12px;
+}
+
+/* Skills */
+ul {
+    list-style: none;
+}
+
+li {
+    background-color: #f5f8fc;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid #1769aa;
+    border-radius: 4px;
+}
+
+li strong {
+    color: #1769aa;
+}
+
+/* Education table */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 13px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #1769aa;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+/* Contact */
+#contact a {
+    color: #1769aa;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+/* Contact form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #1769aa;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button */
+button {
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1769aa;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #104d80;
+}
+
+/* Footer */
+footer {
+    background-color: #263445;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    nav {
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    main {
+        width: 94%;
+        margin: 18px auto;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    section h2 {
+        font-size: 21px;
+    }
+
+    th,
+    td {
+        padding: 9px;
+        font-size: 13px;
+    }
+}
+
